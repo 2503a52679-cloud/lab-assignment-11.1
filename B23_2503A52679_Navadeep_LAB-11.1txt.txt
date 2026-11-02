@@ -1,0 +1,580 @@
+LAB 11.1
+
+PROBLEM-1
+
+Task: Use AI to generate a Stack class with push, pop, peek, and is_empty
+methods.
+Sample Input Code:
+class Stack:
+pass
+Expected Output:
+ A functional stack implementation with all required methods and
+docstrings.
+
+PROMPT:Complete the Stack class in Python. Add push(), pop(), peek(), and is_empty() methods. Use a list to store elements and add simple docstrings. Keep the code short and beginner-friendly.
+
+
+
+CODE:
+
+class Stack:
+    """A simple stack implementation."""
+
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        """Add an item to the stack."""
+        self.items.append(item)
+
+    def pop(self):
+        """Remove and return the top item."""
+        if self.is_empty():
+            return None
+        return self.items.pop()
+
+    def peek(self):
+        """Return the top item without removing it."""
+        if self.is_empty():
+            return None
+        return self.items[-1]
+
+    def is_empty(self):
+        """Check whether the stack is empty."""
+        return len(self.items) == 0
+
+
+# Example
+s = Stack()
+s.push(10)
+s.push(20)
+
+print("Top element:", s.peek())
+print("Popped:", s.pop())
+print("Is empty:", s.is_empty())
+
+
+OUTPUT:
+
+Top element: 20
+Popped: 20
+Is empty: False
+
+
+PROBLEM-2
+
+Task Description #2 – Queue Implementation
+Task: Use AI to implement a Queue using Python lists.
+Sample Input Code:
+class Queue:
+pass
+Expected Output:
+ FIFO-based queue class with enqueue, dequeue, peek, and size
+methods.
+
+PROMPT:
+
+Complete the Queue class in Python using a list. Add enqueue(), dequeue(), peek(), and size() methods. Follow FIFO (First In, First Out). Keep the code short, simple, and beginner-friendly.
+
+CODE:
+
+class Queue:
+    def __init__(self):
+        self.items = []
+
+    def enqueue(self, item):
+        self.items.append(item)
+
+    def dequeue(self):
+        if self.items:
+            return self.items.pop(0)
+        return None
+
+    def peek(self):
+        if self.items:
+            return self.items[0]
+        return None
+
+    def size(self):
+        return len(self.items)
+
+
+if __name__ == "__main__":
+    queue = Queue()
+    queue.enqueue(10)
+    queue.enqueue(20)
+
+    print("Front element:", queue.peek())
+    print("Dequeued:", queue.dequeue())
+    print("Queue size:", queue.size())
+
+
+OUTPUT:
+
+Front element: 10
+Dequeued: 10
+Queue size: 1
+
+PROBLEM-3
+
+Task Description #3 – Linked List
+Task: Use AI to generate a Singly Linked List with insert and display
+methods.
+Sample Input Code:
+class Node:
+pass
+
+Week6 -
+Monday
+
+class LinkedList:
+pass
+Expected Output:
+ A working linked list implementation with clear method
+documentation.
+
+PROMPT:
+Complete the Node and LinkedList classes in Python. Create a singly linked list with insert() and display() methods. Add simple docstrings and keep the code short and beginner-friendly.
+
+
+CODE:
+
+class Node:
+    """A node that stores a value and the next node."""
+
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedList:
+	"""A simple singly linked list."""
+
+	def __init__(self):
+		self.head = None
+
+	def insert(self, data):
+		"""Add a value to the end of the list."""
+		new_node = Node(data)
+		if self.head is None:
+			self.head = new_node
+			return
+
+		current = self.head
+		while current.next is not None:
+			current = current.next
+		current.next = new_node
+
+	def display(self):
+		"""Print all values in the list."""
+		current = self.head
+		values = []
+		while current is not None:
+			values.append(str(current.data))
+			current = current.next
+		print(" -> ".join(values))
+
+
+if __name__ == "__main__":
+	linked_list = LinkedList()
+	linked_list.insert(10)
+	linked_list.insert(20)
+	linked_list.insert(30)
+	linked_list.display()
+
+OUTPUT:
+
+10 -> 20 -> 30
+
+
+PROBLEM-4
+
+
+Task Description #4 – Binary Search Tree (BST)
+Task: Use AI to create a BST with insert and in-order traversal methods.
+Sample Input Code:
+class BST:
+pass
+Expected Output:
+ BST implementation with recursive insert and traversal methods.
+
+PROMPT:
+
+Complete the BST class in Python. Add recursive insert() and inorder() traversal methods. Keep the code short, simple, and beginner-friendly. Add simple docstrings.
+
+CODE:
+
+class Node:
+    """A node in a binary search tree."""
+
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+
+class BST:
+    """A simple binary search tree."""
+
+    def __init__(self):
+        self.root = None
+
+    def insert(self, value):
+        """Insert a value into the tree recursively."""
+        def add(node):
+            if node is None:
+                return Node(value)
+            if value < node.value:
+                node.left = add(node.left)
+            else:
+                node.right = add(node.right)
+            return node
+
+        self.root = add(self.root)
+
+    def inorder(self):
+        """Return the values in sorted, inorder order."""
+        values = []
+
+        def visit(node):
+            if node is not None:
+                visit(node.left)
+                values.append(node.value)
+                visit(node.right)
+
+        visit(self.root)
+        return values
+
+
+if __name__ == "__main__":
+    tree = BST()
+    for value in (50, 30, 70, 20, 40, 60, 80):
+        tree.insert(value)
+
+    print("Inorder traversal:", tree.inorder())
+
+OUTPUT:
+
+Inorder traversal: [20, 30, 40, 50, 60, 70, 80]
+
+
+PROBLEM-5
+
+Task Description #5 – Priority Queue
+Task: Use AI to implement a priority queue using Python’s heapq
+module.
+Sample Input Code:
+class PriorityQueue:
+pass
+Expected Output:
+ Implementation with enqueue (priority), dequeue (highest priority),
+and display methods.
+
+PROMPT:
+
+Complete the PriorityQueue class in Python using the heapq module. Add enqueue(item, priority), dequeue(), and display() methods. Make the highest priority item come out first. Keep the code short, simple, and beginner-friendly with simple docstrings.
+
+CODE:
+
+import heapq
+
+
+class PriorityQueue:
+    """A queue where the highest priority item comes out first."""
+
+    def __init__(self):
+        """Create an empty queue."""
+        self.queue = []
+        self.count = 0
+
+    def enqueue(self, item, priority):
+        """Add an item with a priority."""
+        heapq.heappush(self.queue, (-priority, self.count, item))
+        self.count += 1
+
+    def dequeue(self):
+        """Remove and return the highest priority item."""
+        if not self.queue:
+            return None
+        return heapq.heappop(self.queue)[2]
+
+    def display(self):
+        """Display the items in priority order."""
+        for priority, _, item in sorted(self.queue):
+            print(item, "(priority:", -priority, ")")
+
+
+if __name__ == "__main__":
+    priority_queue = PriorityQueue()
+    priority_queue.enqueue("Low priority", 1)
+    priority_queue.enqueue("High priority", 3)
+    priority_queue.enqueue("Medium priority", 2)
+
+    priority_queue.display()
+    print("Dequeued:", priority_queue.dequeue())
+
+
+output:
+
+High priority (priority: 3 )
+Medium priority (priority: 2 )
+Low priority (priority: 1 )
+Dequeued: High priority
+
+
+PROBLEM-6
+
+Task Description #6 – Deque
+Task: Use AI to implement a double-ended queue using
+collections.deque.
+Sample Input Code:
+class DequeDS:
+pass
+Expected Output:
+ Insert and remove from both ends with docstrings.
+
+PROMPT:
+
+Complete the DequeDS class in Python using collections.deque. Add methods to insert and remove items from both ends, with simple docstrings. Keep the code short and beginner-friendly.
+
+CODE:
+
+from collections import deque
+
+
+class DequeDS:
+    """A double-ended queue."""
+
+    def __init__(self):
+        """Create an empty deque."""
+        self.items = deque()
+
+    def insert_front(self, item):
+        """Insert an item at the front."""
+        self.items.appendleft(item)
+
+    def insert_rear(self, item):
+        """Insert an item at the rear."""
+        self.items.append(item)
+
+    def remove_front(self):
+        """Remove and return the front item."""
+        return self.items.popleft()
+
+    def remove_rear(self):
+        """Remove and return the rear item."""
+        return self.items.pop()
+
+
+if __name__ == "__main__":
+    deque_ds = DequeDS()
+    deque_ds.insert_front("front")
+    deque_ds.insert_rear("rear")
+
+    print("Removed from front:", deque_ds.remove_front())
+    print("Removed from rear:", deque_ds.remove_rear())
+
+OUTPUT:
+
+Removed from front: front
+Removed from rear: rear
+
+
+PROBLEM-7
+
+Task Description #7 Real-Time Application Challenge – Choose the
+Right Data Structure
+Scenario:
+Your college wants to develop a Campus Resource Management System
+that handles:
+1. Student Attendance Tracking – Daily log of students
+entering/exiting the campus.
+2. Event Registration System – Manage participants in events with
+quick search and removal.
+3. Library Book Borrowing – Keep track of available books and their
+due dates.
+
+4. Bus Scheduling System – Maintain bus routes and stop
+connections.
+5. Cafeteria Order Queue – Serve students in the order they arrive.
+Student Task:
+ For each feature, select the most appropriate data structure from
+the list below:
+o Stack
+o Queue
+o Priority Queue
+o Linked List
+o Binary Search Tree (BST)
+o Graph
+o Hash Table
+o Deque
+ Justify your choice in 2–3 sentences per feature.
+ Implement one selected feature as a working Python program with
+AI-assisted code generation.
+Expected Output:
+ A table mapping feature → chosen data structure → justification.
+ A functional Python program implementing the chosen feature
+with comments
+
+PROMPT:
+
+
+Solve this Campus Resource Management System scenario.
+
+Choose the most appropriate data structure from Stack, Queue, Priority Queue, Linked List, BST, Graph, Hash Table, and Deque for each:
+1. Student Attendance Tracking
+2. Event Registration System
+3. Library Book Borrowing
+4. Bus Scheduling System
+5. Cafeteria Order Queue
+
+Give a table with Feature, Data Structure, and a 2–3 sentence justification.
+
+Then implement the Cafeteria Order Queue in simple Python using a Queue. Add comments and a small example with output. Keep everything beginner-friendly.
+
+CODE:
+
+"""Campus Resource Management System
+
+Data structure choices:
+
+| Feature | Data Structure | Justification |
+|---|---|---|
+| Student Attendance | Hash Table | Quick ID lookup. |
+| Event Registration | Queue | First-come, first-served. |
+| Library Borrowing | Linked List | Flexible book list. |
+| Bus Scheduling | Priority Queue | Serves urgent buses first. |
+| Cafeteria Orders | Queue | First-in, first-out service. |
+"""
+
+from collections import deque
+
+
+class CafeteriaOrderQueue:
+    """A simple first-in, first-out queue for cafeteria orders."""
+
+    def __init__(self):
+        self.orders = deque()
+
+    def add_order(self, order):
+        """Add an order to the back of the queue."""
+        self.orders.append(order)
+
+    def serve_order(self):
+        """Remove and return the oldest order, or None if empty."""
+        if self.orders:
+            return self.orders.popleft()
+        return None
+
+    def is_empty(self):
+        return len(self.orders) == 0
+
+
+# Small example
+if __name__ == "__main__":
+    cafeteria = CafeteriaOrderQueue()
+    cafeteria.add_order("Order 1: Sandwich")
+    cafeteria.add_order("Order 2: Salad")
+    cafeteria.add_order("Order 3: Juice")
+
+    print("Serving cafeteria orders:")
+    while not cafeteria.is_empty():
+        print(cafeteria.serve_order())
+
+OUTPUT:
+
+Serving cafeteria orders:
+Order 1: Sandwich
+Order 2: Salad
+Order 3: Juice
+
+PROBLEM-8
+
+Task Description #8: Smart E-Commerce Platform – Data Structure
+Challenge
+An e-commerce company wants to build a Smart Online Shopping System
+with:
+1. Shopping Cart Management – Add and remove products
+dynamically.
+2. Order Processing System – Orders processed in the order they are
+placed.
+3. Top-Selling Products Tracker – Products ranked by sales count.
+
+4. Product Search Engine – Fast lookup of products using product ID.
+5. Delivery Route Planning – Connect warehouses and delivery
+locations.
+Student Task:
+ For each feature, select the most appropriate data structure from
+the list below:
+o Stack
+o Queue
+o Priority Queue
+o Linked List
+o Binary Search Tree (BST)
+o Deque
+ Justify your choice in 2–3 sentences per feature.
+ Implement one selected feature as a working Python program with
+AI-assisted code generation.
+Expected Output:
+ A table mapping feature → chosen data structure → justification.
+ A functional Python program implementing the chosen feature
+with comments and docstrings.
+
+PROMPT:
+
+Solve this Smart E-Commerce Platform data structure challenge.
+
+Choose the most appropriate data structure from Stack, Queue, Priority Queue, Linked List, BST, and Deque for:
+1. Shopping Cart Management
+2. Order Processing System
+3. Top-Selling Products Tracker
+4. Product Search Engine
+5. Delivery Route Planning
+
+Give a table with Feature, Data Structure, and a 2–3 sentence justification.
+
+Then implement the Order Processing System in simple Python using a Queue. Add comments, docstrings, and a small example with output. Keep the code short and beginner-friendly.
+
+CODE:
+
+"""Smart E-Commerce Platform data structures.
+
+Feature | Data Structure | Justification
+--- | --- | ---
+Shopping Cart Management | Stack | Supports undoing recent cart changes.
+Order Processing System | Queue | Processes orders first-in, first-out.
+Top-Selling Products | Priority Queue | Returns the top product.
+Product Search Engine | BST | Stores products in sorted order.
+Delivery Route Planning | Linked List | Keeps delivery stops in order.
+"""
+
+from collections import deque
+
+
+class OrderQueue:
+    """Process customer orders in first-in, first-out order."""
+
+    def __init__(self):
+        self.orders = deque()
+
+    def add_order(self, order):
+        """Add an order to the back of the queue."""
+        self.orders.append(order)
+
+    def process_order(self):
+        """Remove and return the oldest order, or None if empty."""
+        return self.orders.popleft() if self.orders else None
+
+
+# Small example
+queue = OrderQueue()
+queue.add_order("Order 101")
+queue.add_order("Order 102")
+print("Processing:", queue.process_order())
+print("Processing:", queue.process_order())
+
+
+OUTPUT:
+
+Processing: Order 101
+Processing: Order 102
